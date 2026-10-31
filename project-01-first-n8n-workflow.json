@@ -1,0 +1,163 @@
+{
+  "name": "Project 01 - My First n8n Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        -16
+      ],
+      "id": "d44bb6f9-8bdd-4884-8301-9fba47c4a0fc",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7b38435d-ebe9-4d62-804c-0193f2df9b82",
+              "name": "name",
+              "value": "Manan",
+              "type": "string"
+            },
+            {
+              "id": "99e7db1e-e9d1-4520-9a6c-95a550ff6c70",
+              "name": "course",
+              "value": "Agentic AI",
+              "type": "string"
+            },
+            {
+              "id": "f4e89714-1ea8-4984-91fe-24722b71f359",
+              "name": "project",
+              "value": 1,
+              "type": "number"
+            },
+            {
+              "id": "4c7e0632-7456-42a3-92bb-6d4f3d8665ef",
+              "name": "status",
+              "value": "Learning Started",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        -336,
+        -16
+      ],
+      "id": "583f750d-8d8e-49aa-97da-6cf12ccd76b7",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3e5f4b4d-7afd-447d-a2fb-85c00cf38dc9",
+              "name": "welcome_message",
+              "value": "={{ 'Hello ' + $json.name + ', welcome to ' + $json.course + '!' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        -112,
+        -16
+      ],
+      "id": "dc6aa69b-66f2-42ea-93b7-48eeef3aae79",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "292b18bb-0945-4254-82d7-cd72d61916f4",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "Learning Started",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        112,
+        -16
+      ],
+      "id": "2d832eb5-797c-4916-94d4-910fe8fbdb55",
+      "name": "If"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "5b13057e-6241-47fe-a328-4502575fb5ed",
+  "meta": {
+    "instanceId": "6ac82cbf113b09f2116e632e1b502aebea2816fab7e80f06a2662c81a38f752f"
+  },
+  "nodeGroups": [],
+  "id": "29nCRxSEoNBetmOp",
+  "tags": []
+}
